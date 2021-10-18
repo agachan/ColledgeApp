@@ -10,10 +10,13 @@
 
 それに加えて計算式がわかりやすいようにTexファイルで計算式を出力しています．それを参照しながら実行を変更してみてください．
 
-## ファイルの内容
-### parameter.m
+# 使い方とオプション
+
+
+# ファイルの内容
+## parameter.m
 - このファイルではパラメータを設定しています．\
-パラメータは以下の形で設定されています．
+初期パラメータは以下の形で設定されています．
 
 | パラメータ|意味|行×列|初期値|
 |:--|:--|:--:|:--:|
@@ -27,6 +30,8 @@
 |M|bigMの範囲数|1×1|10e30|
 
 以上のパラメータを用いて特定のパラメータを生成します．生成する際に使用する関数は以下です．
+- パラメータ設定関数(App\Program\functions\parameter)
+
 | 関数名|引数1|引数2|引数3|引数4|初期値|
 |:--|:--|:--|:--|:--|:--|
 |pdr|時間|SIZE|上限値||pdr(t,N,0.02)|
@@ -56,6 +61,32 @@ paに関してはpdr値を用いるためpdrがpaの生成より早くないと�
 |pdr.mat|シナリオにおけるノードuの需要家iの調達量限界値[kWh]|pdr_1,pdr_2,pdr_3|別紙参照|
 |lambdaG.mat|ノードuにおける発電業者のブロックo入札価格[JPY/kWh]|lambdaG_1,lambdaG_2,lambdaG_3|別紙参照|
 |lambdaD.mat|ノードuにおける需要のブロックnの入札価格[JPY/kWh]|lambdaD_1,lambdaD_2,plambdaD_3|別紙参照|
-### calculate.m
-### output.m
+
+設定されたパラメータは実行時間を取得する関数getTime関数によって自動的にファイル化され保存されます．\
+＊保存先はApp\Datas\Parameter
+
+## calculate.m
+* このファイルではparameter.mで保存されたパラメータを用いて実際にGurobiを用いて計算を行う．
+* 実行する関数に関してはApp\Formulaファイル内にて記載しているため参照してほしい．
+### データの取得　App\Program\functions\getDatas.m
+- データの取得に関してはgetDatas関数を用いて取得を行います．以下の4つのパスを用いてデータの取得から実行結果の保存までを統括して行います．
+
+|パス名|意味|PASS|
+|:--|:--|:--|
+|CAL_PASS|計算を行う場所calculate.mのPASS|App\Program\functions\calculate|
+|GET_PASS|取得するパラメータのフォルダ|App\Datas\Params|
+|SAVE_PASS|実行結果を保存するためのパス|App\Datas\Results|
+|GETDATA_PASS|実際に使用するパラメータのファイルパス|App\Datas\Params\パラメータのフォルダ名|
+
+* GETDATA_PASSに関してはgetDatas関数を通してから得られるパス
+* GETDATA_PASSを用いてデータをロードする．
+
+### 列の展開　App/Program/functions/calculate/coordinates1.m,coordinates3.m
+* 目的関数は決定変数によって構成されている．まずは列を設定することによってどこに値を入れればいいのかを探ることができる．
+* 取得する値に関しては列の先頭とサイズの値である．
+* coordinates1とcoordinates3の違いは引数が1か3の違い．
+
+
+
+## output.m
 ## 関数の内容
