@@ -1,0 +1,28 @@
+function mk1 = makeMK(pa_1,pdr_1,N,m)
+%MAKEMK この関数の概要をここに記述
+%   詳細説明をここに記述
+drb1=zeros(1,m);
+mk1=zeros(1,m);
+for i=1:N
+    if drb1(1)>pa_1(1)
+        mk1(1)=i-1;
+    break
+    end
+    drb1(1)=drb1(1)+pdr_1(i);
+end
+
+for j=2:m
+for i=mk1(j-1)+1:N
+    if i==N
+       mk1(j)=i;
+        break
+    end
+    if drb1(j)>pa_1(j)-pa_1(j-1)
+        mk1(j)=i-1;
+        break
+    end
+    drb1(j)=drb1(j)+pdr_1(i);
+end
+end
+end
+

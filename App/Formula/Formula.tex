@@ -1,0 +1,118 @@
+\documentclass[a4j,10.5pt]{jarticle}
+
+\usepackage{bm}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{fancybox,ascmac}
+\usepackage{here}
+\usepackage[dvipdfmx]{graphicx}
+\setlength{\topmargin}{-1.2in}
+\setlength{\hoffset}{8mm}
+\setlength{\voffset}{8mm}
+\setlength{\oddsidemargin}{-64pt}
+\setlength{\textwidth}{7.2in}
+\setlength{\textheight}{10.7in}
+\setlength{\footskip}{0.5pt}
+
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
+\newcommand{\mymin}{\mathop{\rm min}\limits}
+\newcommand{\mymax}{\mathop{\rm max}\limits}
+
+\makeatletter
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+\makeatother
+\begin{document}
+\begin{align}
+&{\rm maximize}\quad \sum_{t=1}^{48} \sum_{\Omega\in \omega}\gamma_{(\omega)}^{(t)}\left[\sum_{u\in \mathcal{L}} \sum_{m\in BM_u}\alpha_u P_{u,m}^{A(t)}-\sum_{u\in \mathcal{L}}\sum_{i\in \mathcal{S}_u}C_{u,i}^{DR(t)}P_{u,i(\omega)}^{DR(t)}\notag \right. \\
+&~~~~~~~~~~~~~~~~~~\left.+\sum_{u\in \mathcal{L}}\lambda_{u(\omega)}^{(t)Bal+}P_{u(\omega)}^{(t)Bal+}-\sum_{u,\in \mathcal{L}}\lambda_{u(\omega)}^{(t)Bal-}P_{u(\omega)}^{(t)Bal-}\right]\label{DA1}\\
+&{\rm subject\,\,to}\qquad 0\le P_{u,i(\omega)}^{DR(t)}\le \overline{P_{u,i(\omega)}^{DR(t)}},\ \forall u,t\in\mathcal{L},\ \forall i\in\mathcal{S}_u, \forall \omega \in \Omega \label{DA2}\\
+&~~~~~~~~~~~~~~~~~~\sum_{i\in \mathcal{S}_u}P_{u,i}^{DR(t)}-P_{u(\omega)}^{(t)Bal+}+P_{u(\omega)}^{(t)Bal-}=\sum_{m\in BM_u}P_{u,m}^{A(t)},\ \forall u,t\in\mathcal{L},\ \forall \omega \in \Omega \label{DA3}\\
+&~~~~~~~~~~~~~~~~~~P_{u(\omega)}^{(t)Bal+}P_{u(\omega)}^{(t)Bal-}=0,\ \forall u,t\in\mathcal{L},\ \forall \omega \in \Omega \label{DA4}\\
+&~~~~~~~~~~~~~~~~~~0\le P_{u(\omega)}^{(t)Bal+},P_{u(\omega)}^{(t)Bal-},\lambda_{u,m}^{A(t)},\ \forall u,t\in\mathcal{L},\ m\in BM_u,\ \forall \omega \in \Omega\label{DA5}\\
+&\quad \quad \quad {\rm minimize}\,\sum_{u\in \mathcal{L}}\sum_{m\in BM_u}\lambda^{A(t)}_{u,m}P^{A(t)}_{u,m}+\sum_{u\in \mathcal{L}}\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{u,t\in \mathcal{L}}\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\label{DA6}\\
+&\quad \quad \quad {\rm subject\,\,to}\quad \sum_{m\in BM_u}P^{A(t)}_{u,m}+\sum_{o\in BO_u}P^{G(t)}_{u,o}-\sum_{n\in BN_u}P^{D(t)}_{u,n}\notag \\
+&\qquad \qquad \qquad  \qquad \qquad \qquad -\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})=0,\  \forall u,t \in \mathcal{L}\label{DA7}\\
+&\qquad \qquad \qquad  \qquad -f^{max}_{uv} \leq B_{uv}(\theta_{u}^{(t)}-\theta_{v}^{(t)}) \leq f^{max}_{uv},\ \forall u,v,t \in \mathcal{L}\label{DA8}\\
+&\qquad \qquad \qquad \qquad  0\leq P^{A(t)}_{u,m} \leq p^{A(t)}_{u,m},\ \forall m\in BM_u, \forall u,t \in \mathcal{L}\label{DA9}\\
+&\qquad \qquad \qquad \qquad  0\leq P^{G(t)}_{u,o}\leq p^{G(t)}_{l,o},\ \forall o\in BO_u, \forall u,t \in \mathcal{L}\label{DA10}\\
+&\qquad \qquad \qquad \qquad  0\leq P^{D(t)}_{u,n} \leq p^{D(t)}_{l,n},\ \forall n\in BN_u, \forall u,t \in \mathcal{L}\label{DA11}\\
+&\qquad \qquad \qquad \qquad  \theta_{u=1}=0,\ \label{DA12}
+\end{align}
+
+
+\subsection{目的関数}
+\begin{align}
+&\sum_{t=1}^{48} \left[-\sum_{u\in \mathcal{L}} \sum_{o\in BO_u}\lambda_{u,o}^{G(t)}P_{u,o}^{G(t)}+\sum_{u\in \mathcal{L}} \sum_{n\in BN_u}\lambda_{u,n}^{D(t)}P_{u,n}^{D(t)}-\sum_{u,v\in \mathcal{L}}\rho_{uv}^{min}f_{uv}^{max}+\sum_{u,v\in \mathcal{L}}\rho_{uv}^{max}f_{uv}^{max}
+\notag \right. \\
+&\left.-\sum_{u,v\in \mathcal{L}} \sum_{m\in BM_u}2\phi_{uv,m}^{Amax}p_{u,m}^{A(t)}-\sum_{u,v\in \mathcal{L}} \sum_{o\in BO_u}\phi_{uv,o}^{Gmax}p_{u,o}^{G(t)}-\sum_{u,v\in \mathcal{L}} \sum_{n\in BN_u}\phi_{uv,n}^{Dmax}p_{u,n}^{D(t)}-\sum_{u,v\in \mathcal{L}}\sum_{i\in \mathcal{S}_u}C_{u,i}^{DR(t)}P_{u,i(\omega)}^{DR(t)}\right]\tag{OBJ}
+\end{align}
+\subsection{不等式制約条件}
+\begin{align}
+-P_{u,m}^{A(t)}&\le 0&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{m-1}\\
+P_{u,m}^{A(t)}&\le p_{u,m}^{A(t)}&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{m-2}\\
+ -\phi_{u,m}^{Amin}&\le 0&\quad \forall u,t\in\mathcal{L},\forall n\in BM_u  \tag{m-3}\\
+ -\phi_{u,m}^{Amax}&\le 0&\quad \forall u,t\in\mathcal{L},\forall n\in BM_u  \tag{m-4}\\
+\phi_{u,m}^{Amin(t)} - Mu^{Amin(t)}_{u,m} &\le0&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u  \tag{m-5}\\
+P_{u,m}^{A(t)}+Mu^{Amin(t)}_{u,m} &\le M&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{m-6}\\
+\phi_{u,m}^{Amax(t)}-Mu^{Amax(t)}_{u,m}&\le0&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{m-7}\\
+-P_{u,m}^{A(t)}+Mu^{Amax(t)}_{u ,m}&\le M-p_{u,m}^{A(t)}&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{m-8}
+\end{align}
+\begin{align}
+-P_{u,o}^{G(t)}&\le 0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-1}\\
+P_{l,o}^{G(t)}&\le p_{u,o}^{G(t)}&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-2}\\
+ -\phi_{u,o}^{Gmin}&\le 0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u  \tag{o-3}\\
+ -\phi_{u,o}^{Gmax}&\le 0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u  \tag{o-4}\\
+ \phi_{u,o}^{Gmin(t)} - Mu^{Gmin(t)}_{u,o} &\le0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-5}\\
+P_{u,o}^{G(t)}+Mu^{Gmin(t)}_{u,o} &\le M&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-6}\\
+\phi_{u,o}^{Gmax(t)}-Mu^{Gmax(t)}_{u,o}&\le0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-7}\\
+-P_{l,o}^{G(t)}+Mu^{Gmax(t)}_{u,o}&\le M-p_{u,o}^{G(t)}&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{o-8}
+\end{align}
+\begin{align}
+-P_{u,n}^{D(t)}&\le 0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u \tag{n-1}\\
+P_{u,n}^{D(t)}&\le p_{u,n}^{D(t)}&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u \tag{n-2}\\
+ -\phi_{u,n}^{Dmin}&\le 0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u  \tag{n-3}\\
+ -\phi_{u,n}^{Dmax}&\le 0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u  \tag{n-4}\\
+ \phi_{u,n}^{Dmin(t)} - Mu^{Dmin(t)}_{u,n} &\le0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u  \tag{n-5}\\
+P_{u,n}^{D(t)}+Mu^{Dmin(t)}_{u,n} &\le M&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u \tag{n-6}\\
+\phi_{u,n}^{Dmax(t)}-Mu^{Dmax(t)}_{u,n}&\le0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u  \tag{n-7}\\
+-P_{u,n}^{D(t)}+Mu^{Dmax(t)}_{l ,n}&\le M-p_{u,n}^{D(t)}&\forall n,t\in BN_u \tag{n-8}
+\end{align}
+\begin{align}
+ -\rho_{uv}^{min}&\le 0&\quad \forall u,v\in\mathcal{L}\tag{rho-1}\\
+ -\rho_{uv}^{max}&\le 0&\quad \forall u,v\in\mathcal{L}\tag{rho-2}\\
+\rho_{uv}^{min}-Mu^{min}_{uv}&\le 0&\forall u,v \in \mathcal{L} \tag{rho-3}\\
+\rho_{uv}^{max}-Mu^{max}_{uv}&\le 0&\forall u,v \in \mathcal{L} \tag{rho-4}\\
+B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})&\le f_{uv}^{max}&\forall u,v \in \mathcal{L}\tag{rho-5}\\
+-B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})&\le f_{uv}^{max}&\forall u,v \in \mathcal{L}\tag{rho-6}\\
+B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})+Mu^{min(t)}_{uv}&\le M-f_{uv}^{max}&\forall u,v \in \mathcal{L}\tag{rho-7}\\
+-B_{uv}(\theta_u^{(t)}-\theta_v^{(t)}) +Mu^{max(t)}_{uv}&\le M-f_{uv}^{max}&\forall u,v \in \mathcal{L}\tag{rho-8}
+\end{align}
+
+\begin{align}
+-\lambda_{u,m}^{A(t)}&\le0&\forall u,t\in\mathcal{L},\forall m\in BM_u \tag{lambdaA}
+\end{align}
+\begin{align}
+-P_{u,i(\omega)}^{DR(t)} &\le 0 & \forall u,t\in\mathcal{L},\ \forall i\in\mathcal{S}_u, \forall \omega \in \Omega \tag{PDR-1}\\
+P_{u,i(\omega)}^{DR(t)} &\le \overline{P_{ru,i(\omega)}^{DR(t)}}  & \forall u,t\in\mathcal{L},\ \forall i\in\mathcal{S}_u, \forall \omega \in \Omega \tag{PDR-2}
+\end{align}
+
+\begin{align}
+-P_{u(\omega)}^{(t)Bal+}&\le0&\forall u,t\in\mathcal{L},\forall \omega \in \Omega \tag{ppv-1}\\
+-P_{u(\omega)}^{(t)Bal-}&\le 0&\forall u,t\in\mathcal{L},\forall \omega \in \Omega \tag{ppv-2}
+\end{align}
+
+\subsection{等式制約}
+\begin{align}
+&-\sum_{m\in BM_u}P_{u,m}^{A(t)}+\sum_{i\in \mathcal{S}_u}P_{u,i}^{DR(t)}-P_{u(\omega)}^{(t)Bal+}+P_{u(\omega)}^{(t)Bal-}=0 &\forall u,t\in\mathcal{L},\ \forall \omega \in \Omega \tag{eq-1}\\
+&\sum_{m\in BM_u}P^{A(t)}_{u,m}+\sum_{o\in BO_u}P^{G(t)}_{u,o}-\sum_{n\in BN_u}P^{D(t)}_{u,n}-\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})=0&\forall u,t \in \mathcal{L}\tag{eq-2}\\
+&\theta_{u=1}=0 \tag{eq-3}\\
+&\lambda_{u,m}^{A(t)}-\phi_{u,m}^{Amin(t)}+\phi_{u,m}^{Amax(t)}+\alpha_u^{(t)}=0&\quad \forall u,t\in\mathcal{L},\forall m\in BM_u \tag{eq-4}\\
+&\lambda_{u,o}^{G(t)}-\phi_{u,o}^{Gmin(t)}+\phi_{u,o}^{Gmax(t)}+\alpha_u^{(t)}=0&\quad \forall u,t\in\mathcal{L},\forall o\in BO_u \tag{eq-5}\\
+&\lambda_{u,n}^{D(t)}-\phi_{u,n}^{Dmin(t)}+\phi_{u,n}^{Dmax(t)}-\alpha_u^{(t)}=0&\quad \forall u,t\in\mathcal{L},\forall n\in BN_u \tag{eq-6}\\
+&B_{uv}(-\alpha_u^{(t)}-\rho_{uv}^{min(t)}+\rho_{uv}^{max(t)}-\rho_{uv}^{min(t)}+\rho_{uv}^{max(t)})+(\gamma)_{u=1}=0&\forall u,t\in \mathcal{L}\tag{eq-7}
+\end{align}
+\end{document}

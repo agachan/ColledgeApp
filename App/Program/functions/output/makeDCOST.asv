@@ -1,0 +1,17 @@
+function drcost_1 = makeDCOST(pdr_1,cdr_1,pA,mk,t)
+%MAKEDCOST この関数の概要をここに記述
+%   詳細説明をここに記述
+drcost_1=zeros(1,m);
+    for j=1:m
+        if j==1
+            for i=1+1:mk(j)
+                drcost_1(1)=drcost_1(1)+pdr_1(i)*cdr_1(i);
+            end
+        else
+            for i=mk(j-1)+1:mk(j)
+                drcost_1(j)=drcost_1(j)+pdr_1(i)*cdr_1(i);
+            end
+        end
+    end
+end
+

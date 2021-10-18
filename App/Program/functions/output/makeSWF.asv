@@ -1,0 +1,22 @@
+function swf = makeSWF(R_P,RI_P
+,lambda,t,FLAG)
+%MAKESWF この関数の概要をここに記述
+%   詳細説明をここに記述
+swf = zeros(t,1);
+
+if FLAG == 'A'
+    for j=1:t
+        for i=0:RI(4)-1
+            swf=swf+lambda(RI(1)+i)*R_P(RI(1)+i)+lambda(RI(2)+i)*R_P(RI(2)+i)+lambda(RI(3)+i)*R_P(RI(3)+i);
+        end
+    end
+else
+    
+    for j=1:t
+        for i=0:RI(4)-1
+            swf=swf+lambdaG(iRI+1)*R_PG(RI_PG(1)+i)+lambdaG_2(i+1)*R_PG(RI_PG(2)+i)+lambdaG_3(i+1)*R_PG(RI_PG(3)+i);
+        end
+    end
+end
+end
+
