@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2021.3.16)  11 OCT 2021 12:36
+This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2021.3.16)  20 OCT 2021 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -198,7 +198,16 @@ LaTeX Warning: Unused global option(s):
 
 (./Formula.aux
 
-LaTeX Warning: Label `DA1' multiply defined.
+LaTeX Warning: Label `3.2-1' multiply defined.
+
+
+LaTeX Warning: Label `3.2-1' multiply defined.
+
+
+LaTeX Warning: Label `3.2-5' multiply defined.
+
+
+LaTeX Warning: Label `3.2-5' multiply defined.
 
 )
 \openout1 = `Formula.aux'.
@@ -221,36 +230,44 @@ LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 29.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 29.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 29.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
 
  (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 29.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 
 
 (c:/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 47.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 47.
- [1
+) [1
 
-] [2] [3]
-(./Formula.aux)
+] [2]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 88.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 88.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 97.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 97.
+ [3] [4]
+[5] [6] [7] (./Formula.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2499 strings out of 479487
- 31843 string characters out of 5874783
- 370500 words of memory out of 5000000
- 20172 multiletter control sequences out of 15000+600000
- 412458 words of font info for 64 fonts, out of 8000000 for 9000
+ 2549 strings out of 479487
+ 32175 string characters out of 5874783
+ 368500 words of memory out of 5000000
+ 20222 multiletter control sequences out of 15000+600000
+ 413989 words of font info for 70 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 68i,10n,74p,352b,181s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,14n,74p,352b,243s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Formula.dvi (3 pages, 14076 bytes).
+Output written on Formula.dvi (7 pages, 36760 bytes).
