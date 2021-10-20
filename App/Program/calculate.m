@@ -351,7 +351,7 @@ aeq = barray(aeq,NEXTCOL,lambdaD,'lambdaD');
 
 %% B_uv(-alpha -rhomin + rhomax) + gamma = 0
 fprintf('\n\n\n-----------------eq-7-----------------\nB_uv(-alpha -rhomin + rhomax) + gamma = 0\n------------------------------------\n')
-[Aeq,NEXTCOL]  = substitution(Aeq,NEXTCOL,alpha_top ,-EQ1Bs ,t,'B_uv(-alpha)',0);
+[Aeq,NEXTCOL]  = substitution(Aeq,NEXTCOL,alpha_top ,-EQ1Bs ,t,'B_uv(-alpha)',2);
 [Aeq,NEXTCOL]  = substitution(Aeq,NEXTCOL,rhomin_top,-EQ2Bs ,t,'-rhomin',0);
 [Aeq,NEXTCOL]  = substitution(Aeq,NEXTCOL,rhomax_top,EQ2Bs  ,t,'rhomax',0);
 [Aeq,NEXTCOL]  = substitution(Aeq,NEXTCOL+2,gamma_top,1,t,'gamma',0);

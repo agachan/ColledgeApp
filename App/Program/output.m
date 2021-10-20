@@ -35,10 +35,13 @@ LMP1 = zeros(t,1);
 LMP2 = zeros(t,1);
 LMP3 = zeros(t,1);
 for j = 1:t
-    TIME(j,1) = j;
 LMP1(j,1) = R_alpha(j,RI_alpha(1));
 LMP2(j,1) = R_alpha(j,RI_alpha(2));
 LMP3(j,1) = R_alpha(j,RI_alpha(3));
+end
+
+for j = 1:t
+TIME(j,1) = j;
 f1(j,1)=Bs(1)*(R_theta(j,RI_theta(1))-R_theta(j,RI_theta(2)));
 f2(j,1)=Bs(2)*(R_theta(j,RI_theta(1))-R_theta(j,RI_theta(3)));
 f3(j,1)=Bs(3)*(R_theta(j,RI_theta(2))-R_theta(j,RI_theta(3)));

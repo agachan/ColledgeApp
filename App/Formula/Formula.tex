@@ -1,5 +1,4 @@
-\documentclass[a4j,10.5pt]{jarticle}
-
+\documentclass[a4j,10.5pt,fleqn]{jarticle}
 \usepackage{bm}
 \usepackage{url}
 \usepackage{amsmath}
@@ -20,30 +19,232 @@
 \newcommand{\argmin}{\mathop{\rm arg~min}\limits}
 \newcommand{\mymin}{\mathop{\rm min}\limits}
 \newcommand{\mymax}{\mathop{\rm max}\limits}
-
+\setlength{\mathindent}{10pt}
 \makeatletter
 \newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
 \newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
 \makeatother
 \begin{document}
+\section{記号一覧}
 \begin{align}
-&{\rm maximize}\quad \sum_{t=1}^{48} \sum_{\Omega\in \omega}\gamma_{(\omega)}^{(t)}\left[\sum_{u\in \mathcal{L}} \sum_{m\in BM_u}\alpha_u P_{u,m}^{A(t)}-\sum_{u\in \mathcal{L}}\sum_{i\in \mathcal{S}_u}C_{u,i}^{DR(t)}P_{u,i(\omega)}^{DR(t)}\notag \right. \\
-&~~~~~~~~~~~~~~~~~~\left.+\sum_{u\in \mathcal{L}}\lambda_{u(\omega)}^{(t)Bal+}P_{u(\omega)}^{(t)Bal+}-\sum_{u,\in \mathcal{L}}\lambda_{u(\omega)}^{(t)Bal-}P_{u(\omega)}^{(t)Bal-}\right]\label{DA1}\\
-&{\rm subject\,\,to}\qquad 0\le P_{u,i(\omega)}^{DR(t)}\le \overline{P_{u,i(\omega)}^{DR(t)}},\ \forall u,t\in\mathcal{L},\ \forall i\in\mathcal{S}_u, \forall \omega \in \Omega \label{DA2}\\
-&~~~~~~~~~~~~~~~~~~\sum_{i\in \mathcal{S}_u}P_{u,i}^{DR(t)}-P_{u(\omega)}^{(t)Bal+}+P_{u(\omega)}^{(t)Bal-}=\sum_{m\in BM_u}P_{u,m}^{A(t)},\ \forall u,t\in\mathcal{L},\ \forall \omega \in \Omega \label{DA3}\\
-&~~~~~~~~~~~~~~~~~~P_{u(\omega)}^{(t)Bal+}P_{u(\omega)}^{(t)Bal-}=0,\ \forall u,t\in\mathcal{L},\ \forall \omega \in \Omega \label{DA4}\\
-&~~~~~~~~~~~~~~~~~~0\le P_{u(\omega)}^{(t)Bal+},P_{u(\omega)}^{(t)Bal-},\lambda_{u,m}^{A(t)},\ \forall u,t\in\mathcal{L},\ m\in BM_u,\ \forall \omega \in \Omega\label{DA5}\\
-&\quad \quad \quad {\rm minimize}\,\sum_{u\in \mathcal{L}}\sum_{m\in BM_u}\lambda^{A(t)}_{u,m}P^{A(t)}_{u,m}+\sum_{u\in \mathcal{L}}\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{u,t\in \mathcal{L}}\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\label{DA6}\\
-&\quad \quad \quad {\rm subject\,\,to}\quad \sum_{m\in BM_u}P^{A(t)}_{u,m}+\sum_{o\in BO_u}P^{G(t)}_{u,o}-\sum_{n\in BN_u}P^{D(t)}_{u,n}\notag \\
-&\qquad \qquad \qquad  \qquad \qquad \qquad -\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})=0,\  \forall u,t \in \mathcal{L}\label{DA7}\\
-&\qquad \qquad \qquad  \qquad -f^{max}_{uv} \leq B_{uv}(\theta_{u}^{(t)}-\theta_{v}^{(t)}) \leq f^{max}_{uv},\ \forall u,v,t \in \mathcal{L}\label{DA8}\\
-&\qquad \qquad \qquad \qquad  0\leq P^{A(t)}_{u,m} \leq p^{A(t)}_{u,m},\ \forall m\in BM_u, \forall u,t \in \mathcal{L}\label{DA9}\\
-&\qquad \qquad \qquad \qquad  0\leq P^{G(t)}_{u,o}\leq p^{G(t)}_{l,o},\ \forall o\in BO_u, \forall u,t \in \mathcal{L}\label{DA10}\\
-&\qquad \qquad \qquad \qquad  0\leq P^{D(t)}_{u,n} \leq p^{D(t)}_{l,n},\ \forall n\in BN_u, \forall u,t \in \mathcal{L}\label{DA11}\\
-&\qquad \qquad \qquad \qquad  \theta_{u=1}=0,\ \label{DA12}
+&\mbox{集合}\notag\\
+&~~~~~~~~~~T:\mbox{時間集合}\notag\\
+&~~~~~~~~~~\Omega:\mbox{シナリオ集合}\notag\\
+&~~~~~~~~~~\mathcal{L}:\mbox{ノード集合}\notag\\
+&~~~~~~~~~~\mathcal{N}:\mbox{DRに参加する需要家の集合}\notag\\
+&~~~~~~~~~~\mathcal{S}_u:\mbox{ノード$u$におけるDRに参加する需要家の集合}\notag\\
+&~~~~~~~~~~BM_u:\mbox{ノード$u$におけるアグリゲータの入札ブロックの集合}\notag\\
+&~~~~~~~~~~BO_u:\mbox{ノード$u$における発電業者の入札ブロックの集合}\notag\\
+&~~~~~~~~~~BN_u:\mbox{ノード$u$における需要の入札ブロックの集合}\notag\\
+&\mbox{定数}\notag\\
+&~~~~~~~~~~\gamma(\omega):\mbox{シナリオ$\omega$の生起確率}\notag\\
+&~~~~~~~~~~C_{t,u,i}^{DR}:\mbox{時間$t$における需要家$i$の調達費用}\mbox{[JPY/kWh]}\notag\\
+&~~~~~~~~~~\overline{P^{DR}_{t,u,i}}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の需要家$i$の調達量上限値}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~\lambda_{t,u}^{Bal+}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の余剰インバランス価格[JPY/kWh]}\notag\\
+&~~~~~~~~~~\lambda_{t,u}^{Bal-}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の不足インバランス価格[JPY/kWh]}\notag\\
+&~~~~~~~~~~B_{uv}:\mbox{ノード$u,v$間のサセプタンス[$S$]}\notag\\
+&~~~~~~~~~~f_{uv}^{max}:\mbox{ノード$u,v$間の送電線容量}\mbox{[MW]}\notag\\
+&~~~~~~~~~~p_{t,u,m}^A:\mbox{時間$t$，アグリゲータのノード$u$におけるブロック$m$の入札量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~\lambda_{t,u,o}^G:\mbox{時間$t$，ノード$u$における発電業者のブロック$o$の入札価格}\mbox{[JPY/kWh]}\notag\\
+&~~~~~~~~~~p_{t,u,o}^G:\mbox{時間$t$，ノード$u$における発電業者のブロック$o$の入札量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~\lambda_{t,u,n}^D:\mbox{時間$t$，ノード$u$における需要のブロック$n$の入札価格}\mbox{[JPY/kWh]}\notag\\
+&~~~~~~~~~~p_{t,u,n}^D:\mbox{時間$t$，ノード$u$における需要のブロック$n$の入札量}\mbox{[kWh]}\notag
+\end{align}
+\begin{align}
+&\mbox{決定変数}\notag\\
+&~~~~~~~~~~\lambda_{t,u,m}^{A}:\mbox{時間$t$，アグリゲータのノード$u$におけるブロック$m$の入札価格}\mbox{[JPY/kWh]}\notag\\
+&~~~~~~~~~~\alpha_{t,u}:\mbox{時間$t$，ノード$u$における前日市場の約定価格（LMP）}\mbox{[JPY/kWh]}\notag\\
+&~~~~~~~~~~P_{t,u,m}^A:\mbox{時間$t$，アグリゲータのノード$u$における$m$ブロック目の約定量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~P^{DR}_{t,u,i}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の需要家$i$の調達量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~P_{t,u,o}^G:\mbox{時間$t$，ノード$u$における発電業者の$o$ブロック目の約定量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~P_{t,u,n}^D:\mbox{時間$t$，ノード$u$における需要のノード$u$における$n$ブロック目の約定量}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~P_{t,u}^{Bal+}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の余剰インバランス}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~P_{t,u}^{Bal-}(\omega):\mbox{時間$t$，シナリオ$\omega$におけるノード$u$の不足インバランス}\mbox{[kWh]}\notag\\
+&~~~~~~~~~~\theta_{t,u}:\mbox{時間$t$，ノード$u$における位相角}\mbox{[rad]}\notag
+\end{align}
+\newpage
+% \sum_{t \in T}
+% \forall t\in T,
+\section{定式化}
+\begin{align}
+&{\rm maximize}\quad \sum_{\Omega\in \omega}\sum_{t \in T} \gamma(\omega)\left[\sum_{u\in \mathcal{L}} \sum_{m\in BM_u}\alpha_{u} P_{t,u,m}^{A}-\sum_{u\in \mathcal{L}}\sum_{i\in \mathcal{S}_u}C_{t,u,i}^{DR}P_{t,u,i}(\omega)^{DR}\right.\notag\\
+&\hspace{40mm}\left.+\sum_{u\in \mathcal{L}}\lambda_{t,u}^{Bal+}(\omega)P_{t,u}^{Bal+}(\omega)-\sum_{u,\in \mathcal{L}}\lambda_{t,u,}^{Bal-}(\omega)P_{t,u}^{Bal-}(\omega)\right]\label{DA1}\tag{DA1}
+\end{align}
+\begin{align}
+&{\rm subject\,\,to}\qquad 0\le P_{u,i}^{DR(t)}(\omega)\le \overline{P_{u,i}^{DR(t)}(\omega)}& \forall t\in T,u\in\mathcal{L},\ \forall i\in\mathcal{S}_u, \forall \omega \in \Omega \label{DA2}\tag{DA2}\\
+&\hspace{15mm}\sum_{i\in T}\sum_{i\in \mathcal{S}_u}P_{t,u,i}^{DR}-P_{t,u}^{Bal+}(\omega)+P_{t,u}^{Bal-}(\omega)=\sum_{t \in T}\sum_{m\in BM_u}P_{t,u,m}^{A}& \forall t \in T, \forall u\in\mathcal{L},\ \forall \omega \in \Omega \label{DA3}\tag{DA3}\\
+&\hspace{20mm}P_{t,u}^{Bal+}(\omega)P_{t,u}^{Bal-}(\omega)=0&\forall t\in T,\ \forall u\in\mathcal{L},\ \forall \omega \in \Omega \label{DA4}\tag{DA4}\\
+&\hspace{20mm}0\le P_{t,u}^{Bal+}(\omega),P_{t,u}^{Bal-}(\omega),\lambda_{t,u,m}^{A}& \forall t\in T,\forall u\in\mathcal{L},\ m\in BM_u,\ \forall \omega \in \Omega\label{DA5}\tag{DA5}
+\end{align}
+\begin{align}
+\hspace{20mm}{\rm minimize}\quad\sum_{t \in T}\sum_{u\in \mathcal{L}}\left[\sum_{m\in BM_u}\lambda^{A}_{t,u,m}P^{A}_{t,u,m}+\sum_{o\in BO_u}\lambda^{G}_{t,u,o}P^{G}_{t,u,o}-\sum_{n\in BN_u}\lambda^{D}_{t,u,n}P^{D}_{t,u,n}\right]\label{DA6}\tag{DA6}
+\end{align}
+\begin{align}
+&\hspace{20mm}{\rm subject\,\,to}\quad \sum_{m\in BM_u}P^{A}_{t,u,m}+\sum_{o\in BO_u}P^{G}_{t,u,o}-\sum_{n\in BN_u}P^{D}_{t,u,n}\notag \\
+&\hspace{80mm}-\sum_{v\in \mathcal{L}}B_{uv}(\theta_{t,u}-\theta_{t,v})=0& \forall t\in T, \forall u \in \mathcal{L}\label{DA7}\tag{DA7}\\
+&\hspace{40mm}-f^{max}_{uv} \leq B_{uv}(\theta_{t,u}-\theta_{t,v}) \leq f^{max}_{uv}& \forall t\in T, \forall u,v \in \mathcal{L}\label{DA8}\tag{DA8}\\
+&\hspace{40mm}0\leq P^{A}_{t,u,m} \leq p^{A}_{t,u,m}& \forall m\in BM_u, \forall t\in T,\forall u \in \mathcal{L}\label{DA9}\tag{DA9}\\
+&\hspace{40mm}0\leq P^{G}_{t,u,o}\leq p^{G}_{t,l,o}& \forall o\in BO_u, \forall t\in T, \forall u \in \mathcal{L}\label{DA10}\tag{DA10}\\
+&\hspace{40mm}0\leq P^{D}_{t,u,n} \leq p^{D}_{t,l,n}& \forall n\in BN_u, \forall t\in T, \forall u \in \mathcal{L}\label{DA11}\tag{DA11}\\
+&\hspace{40mm}\theta_{t,u=1}=0&\forall t\in T\label{DA12}\tag{DA12}
+\end{align}
+\newpage
+\section{MILP化までの手順}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{下位問題の式を分解}
+不等式\ref{DA8}\ref{DA9},\ref{DA10},\ref{DA11}を分解すると以下のような形となる．
+\begin{align}
+-B_{uv}(\theta_{t,u}-\theta_{t,v})&\le f_{uv}^{max}&B_{uv}(\theta_{t,u}-\theta_{t,v})&\le f_{uv}^{max}\label{1}\\
+-P_{t,u,m}^{A}&\le 0&P_{t,u,m}^{A}&\le p_{t,u,m}^{A}\label{2}\\
+-P_{t,u,o}^{G}&\le 0&P_{t,l,o}^{G}&\le p_{t,u,o}^{G}\label{3}\\
+-P_{t,u,o}^{G}&\le 0&P_{t,l,o}^{G}&\le p_{t,u,o}^{G}\label{4}
 \end{align}
 
+\begin{itembox}[l]{\bf{KKT条件}}
+	局所最適解$x^*$において目的関数$f(x)$，不等式制約関数$g_i(x)$，等式制約関数$h_j(x)$の間に以下の関係が成り立つ．\\
+	\begin{align}
+	min\hspace{20mm}f(x)&\label{K1}\tag{K1}\\
+	s.t \hspace{20mm}g_i(x)&\le 0\label{K2}\tag{K2}\\
+	h_j(x)&=0\label{K3}\tag{K3}
+	\end{align}
+	\begin{align}
+	&\nabla f(x^*)+ \sum_{i=1}^m \bar{\lambda}_i \nabla g_i(x^*) + \sum_{i=1}^l \bar{\mu}_j \nabla h_j(x^*)=0\label{K4}\tag{K4}\\
+	&0\le\nabla g_i(x^*)\perp\bar{\lambda_i}\geq0\label{K5}\tag{K5}\\
+	&h_j(x^*)=0\label{K6}\tag{K6}
+	\end{align}
+\end{itembox}
 
+KKT条件に適応できるように解問題を式変形すると以下のような形となる．2，3の右側にある変数はラグランジュ乗数で不等式制約では非負，等式制約では自由変数である．
+\begin{enumerate}
+\item $f(x)$に対しては
+\begin{align}
+\sum_{u\in \mathcal{L}}\sum_{m\in BM_u}\lambda^{A(t)}_{u,m}P^{A(t)}_{u,m}+\sum_{u\in \mathcal{L}}\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{u,t\in \mathcal{L}}\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\label{K7}\tag{K7}
+\end{align}
+\item $g_i(\bar{x})\le 0$に対しては
+\begin{align}
+B_{uv}(\theta_v^{(t)}-\theta_u^{(t)})&\le f_{uv}^{max} &B_{uv}(\theta_v^{(t)}-\theta_u^{(t)})-f_{uv}^{max}&\le 0 &\rho_{uv}^{min}\label{K8}\tag{K8}\\
+B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})&\le f_{uv}^{max}&B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})-f_{uv}^{max}&\le 0&\rho_{uv}^{max}\label{K9}\tag{K9}\\
+-P_{u,m}^{A(t)}&\le 0&-P_{u,m}^{A(t)}&\le 0&\phi_{u,m}^{Amin}\label{K10}\tag{K10}\\
+P_{u,m}^{A(t)}&\le p_{u,m}^{A(t)}&P_{u,m}^{A(t)}-p_{u,m}^{A(t)}&\le 0&\phi_{u,m}^{Amax}\label{K11}\tag{K11}\\
+-P_{u,o}^{G(t)}&\le 0&-P_{u,o}^{G(t)}&\le 0&\phi_{u,o}^{Gmin}\label{K12}\tag{K12}\\
+P_{l,o}^{G(t)}&\le p_{l,o}^{G(t)}&P_{l,o}^{G(t)}-p_{l,o}^{G(t)}&\le 0&\phi_{u,o}^{Gmax}\label{K13}\tag{K13}\\
+-P_{u,n}^{D(t)}&\le 0&-P_{u,n}^{D(t)}&\le 0&\phi_{u,n}^{Dmin}\label{K14}\tag{K14}\\
+P_{u,n}^{D(t)}&\le p_{u,n}^{D(t)}&P_{u,n}^{D(t)}-p_{u,n}^{D(t)}&\le 0&\phi_{u,n}^{Dmax}\label{K15}\tag{K15}
+\end{align}
+\item $h_j(\bar{x})=0$に対しては
+\begin{align}
+\sum_{m\in BM_u}P^{A(t)}_{u,m}+\sum_{o\in BO_u}P^{G(t)}_{u,o}-\sum_{n\in BN_u}P^{D(t)}_{u,n}-\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})=0&\hspace{20mm}\alpha_u\label{K16}\tag{K16}\\
+\theta_{u=1}=0&\hspace{20mm}\gamma\label{K17}\tag{K17}
+\end{align}
+\end{enumerate}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{K4}
+KKT条件の式\ref{K4}について考える．\\
+下位問題における決定変数は$\lambda_{u,m}^{A},P_{u,m}^A,P_{u,o}^G,P_{u,n}^D,\theta_u$であるから，
+\begin{enumerate}
+\item $P_{u,m}^A$に関係する式は\ref{K7},\ref{K10},\ref{K11},\ref{K16}であるから，
+\begin{align}
+&\frac{\partial}{\partial P_{u,m}^A}\left[\sum_{u\in \mathcal{L}}\sum_{m\in BM_u}\lambda^{A(t)}_{u,m}P^{A(t)}_{u,m}+\phi_{u,m}^{Amin}(-P_{u,m}^{A(t)})+\phi_{u,m}^{Amax}(P_{u,m}^{A(t)}-p_{u,m}^{A(t)})+\alpha_u\sum_{m\in BM_u}P^{A(t)}_{u,m}\right]&=0\tag{A1}\\
+&\lambda^{A(t)}_{u,m}-\phi_{u,m}^{Amin}+\phi_{u,m}^{Amax}+\alpha_u&=0\tag{A1}\label{A1}
+\end{align}
+\item $P_{u,o}^G$に関係する式は\ref{K7},\ref{K12},\ref{K13},\ref{K16}であるから，
+\begin{align}
+&\frac{\partial}{\partial P_{u,o}^G}\left[\sum_{u\in \mathcal{L}}\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}+\phi_{u,o}^{Gmin}(-P_{u,o}^{G(t)})+\phi_{u,o}^{Gmax}(P_{l,o}^{G(t)}-p_{u,o}^{G(t)})+\alpha_u\sum_{o\in BO_u}P^{G(t)}_{u,o}\right]&=0\tag{A2}\\
+&\lambda^{G(t)}_{u,o}-\phi_{u,o}^{Gmin}+\phi_{u,o}^{Gmax}+\alpha_u&=0\tag{A2}\label{A2}
+\end{align}
+\item $P_{u,n}^D$に関係する式は\ref{K7},\ref{K14},\ref{K15},\ref{K16}であるから，
+\begin{align}
+&\frac{\partial}{\partial P_{u,n}^D}\left[-\sum_{u,t\in \mathcal{L}}\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}+\phi_{u,n}^{Dmin}(-P_{u,n}^{D(t)})+\phi_{u,n}^{Dmax}(P_{u,n}^{D(t)}-p_{u,n}^{D(t)})+\alpha_u(-\sum_{n\in BN_u}P^{D(t)}_{u,n})\right]&=0\tag{A3}\\
+&-\lambda^{D(t)}_{u,n}-\phi_{u,n}^{Dmin}+\phi_{u,n}^{Dmax}-\alpha_u&=0\label{A3}\tag{A3}
+\end{align}
+\item $\theta_u$に関係する式は\ref{K8},\ref{K9},\ref{K16},\ref{K17}であるから，
+\begin{align}
+\frac{\partial}{\partial \theta_u}\left[\rho_{uv}^{min}\left\{ B_{uv}(\theta_v^{(t)}-\theta_u^{(t)})-f_{uv}^{max}\right\}+\rho_{uv}^{max}\left\{ B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})-f_{uv}^{max}\right\}\notag \right. \\
+\left.+\alpha_u\left\{-\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})\right\}+\gamma\theta_{u=1} \right]&=0\tag{A4}\\
+B_{uv}\left(-\rho_{uv}^{min}+\rho_{uv}^{max}-\alpha_u\right)&=0\label{A4}\tag{A4}
+\end{align}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{K5}
+KKT条件の式\ref{K5}について考える．\\
+非線形の制約である相補性条件を，バイナリ変数$u$及び，十分に大きい実数$M$を用いて線形制約に置き換える．以下の式\ref{B1}-\ref{B8}の8本の式はbigM法を用いることにより合計32本の式となる．その時に用いるバイナリ変数を右側に示している．
+\begin{align}
+0\leq \nabla g(x) \perp \mu \geq 0\hspace{20mm}
+\left\{
+\begin{array}{l}
+0\leq \nabla g(x) \leq M(1-u)\\
+0\leq \mu \leq Mu 
+\end{array}
+\right.\hspace{20mm}
+\left\{
+\begin{array}{rl}
+- \nabla g(x)&\leq 0\\
+ \nabla g(x)+uM &\leq M\\
+-\mu &\leq 0\\
+\mu -Mu &\leq 0
+\end{array}
+\right.
+\end{align}
+式\ref{1},\ref{2},\ref{3},\ref{4}は以下のように変換することができる．
+\begin{align}
+0\le B_{uv}(\theta_u-\theta_v)+f_{uv}^{max}&\perp \rho_{uv}^{min}\ge 0&u_{}^{}\label{B1}\tag{B1}\\
+0\le f_{uv}^{max}-B_{uv}(\theta_u-\theta_v)&\perp \rho_{uv}^{max}\ge 0&u_{}^{}\label{B2}\tag{B2}\\
+0\le P_{u,m}^A&\perp \phi_{u,m}^{Amin}\ge 0&u_{u,m}^{Amin(t)}\label{B3}\tag{B3}\\
+0\le p_{u,m}^A-P_{u,m}^A&\perp \phi_{u,m}^{Amax}\ge0&u_{u,m}^{Amax(t)}\label{B4}\tag{B4}\\
+0\le P_{u,o}^G&\perp \phi_{u,o}^{Gmin}\ge 0&u_{u,o}^{Gmin(t)}\label{B5}\tag{B5}\\
+0\le p_{u,o}^G-P_{u,o}^G&\perp \phi_{u,o}^{Gmax} \ge0&u_{u,o}^{Gmax(t)}\label{B6}\tag{B6}\\
+0\le P_{u,n}^D&\perp \phi_{u,n}^{Dmin}\ge 0&u_{u,n}^{Dmin(t)}\label{B7}\tag{B7}\\
+0\le p_{u,n}^D-P_{u,n}^D&\perp \phi_{u,n}^{Dmax}\ge0&u_{u,n}^{Dmax(t)}\label{B8}\tag{B8}
+\end{align}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{K6}
+KKT条件の式\ref{K6}について考える．\\
+\begin{align}
+\sum_{m\in BM_u}P^{A(t)}_{u,m}+\sum_{o\in BO_u}P^{G(t)}_{u,o}-\sum_{n\in BN_u}P^{D(t)}_{u,n}-\sum_{v\in \mathcal{L}}B_{uv}(\theta_u^{(t)}-\theta_v^{(t)})=0&\hspace{20mm}\alpha_u\label{C1}\tag{C1}\\
+\theta_{u=1}=0&\hspace{20mm}\gamma\label{C2}\tag{C2}
+\end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{上位問題の目的関数の線形化}
+上位問題の目的関数の線形化について考える．\ref{DA1}より目的関数は非線形関数となっている．これを線形化するためには\ref{A1}を用いる．
+\begin{align}
+\lambda^{A(t)}_{u,m}-\phi_{u,m}^{Amin}+\phi_{u,m}^{Amax}+\alpha_u=0\tag{3.2-1}\label{3.2-1}\\
+\lambda^{A(t)}_{u,m}P_{u,m}^A-\phi_{u,m}^{Amin}P_{u,m}^A+\phi_{u,m}^{Amax}P_{u,m}^A+\alpha_uP_{u,m}^A=0\tag{3.2-1}\label{3.2-1}\\
+\lambda^{A(t)}_{u,m}P_{u,m}^A=\phi_{u,m}^{Amin}P_{u,m}^A-\phi_{u,m}^{Amax}P_{u,m}^A-\alpha_uP_{u,m}^A\tag{3.2-1}\label{3.2-1}
+\end{align}
+ここで\ref{B3},\ref{B4}の式について考えると，垂直記号の右側と左側はどちらか一方は成り立つという意味から，以下の式が求まる．
+\begin{align}
+&P_{u,m}^A\phi_{u,m}^{Amin}=0\label{3.2-2}\tag{3.2-2}\\
+&(p_{u,m}^A-P_{u,m}^A)\phi_{u,m}^{Amax}=0\hspace{20mm}p_{u,m}^A\phi_{u,m}^{Amax}=P_{u,m}^A\phi_{u,m}^{Amax}\label{3.2-3}\tag{3.2-3}
+\end{align}
+これを式に適応させると，
+\begin{align}
+\lambda^{A(t)}_{u,m}P_{u,m}^A=0-p_{u,m}^A\phi_{u,m}^{Amax}-\alpha_uP_{u,m}^A\tag{3.2-4}\label{3.2-4}
+\end{align}
+
+ここで強双対定理について考える．
+\begin{itembox}[l]{\bf{強双対定理}}
+主問題（P）に最適解$x^*$が存在すれば双対問題（D）にも最適解$y^*$が存在し，以下の式が成立する．
+\[ \bm{c^tx^*}=\bm{b^ty^*}\]
+\end{itembox}
+
+この問題においては\ref{K7}-\ref{K15}を用いる．
+\begin{align}
+\sum_{u\in \mathcal{L}}\left[\sum_{m\in BM_u}\lambda^{A(t)}_{u,m}P^{A(t)}_{u,m}+\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\right] \notag\\
+=\sum_{u\in \mathcal{L}}\left[\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{min}+\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{max}+\sum_{m\in BM_u}p_{u,m}^{A(t)}\phi_{u,m}^{Amax}+\sum_{o\in BO_u}p_{l,o}^{G(t)}\phi_{u,o}^{Gmax}+\sum_{n\in BN_u}p_{u,n}^{D(t)}\phi_{u,n}^{Dmax}\right] \tag{3.2-5}\label{3.2-5}\\
+\sum_{u\in \mathcal{L}}\left[\sum_{m\in BM_u}\left\{-p_{u,m}^A\phi_{u,m}^{Amax}-\alpha_uP_{u,m}^A\right\}+\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\right] \notag\\
+=\sum_{u\in \mathcal{L}}\left[\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{min}+\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{max}+\sum_{m\in BM_u}p_{u,m}^{A(t)}\phi_{u,m}^{Amax}+\sum_{o\in BO_u}p_{l,o}^{G(t)}\phi_{u,o}^{Gmax}+\sum_{n\in BN_u}p_{u,n}^{D(t)}\phi_{u,n}^{Dmax}\right] \tag{3.2-5}\label{3.2-5}\\
+\sum_{u\in \mathcal{L}}\sum_{m\in BM_u}\alpha_uP_{u,m}^A=\sum_{u\in \mathcal{L}}\left[\sum_{m\in BM_u}-2p_{u,m}^{A(t)}\phi_{u,m}^{Amax}+\sum_{o\in BO_u}\lambda^{G(t)}_{u,o}P^{G(t)}_{u,o}-\sum_{n\in BN_u}\lambda^{D(t)}_{u,n}P^{D(t)}_{u,n}\right.\notag\\
+\left.-\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{min}-\sum_{v\in \mathcal{L}}f_{uv}^{max}\rho_{uv}^{max}-\sum_{o\in BO_u}p_{l,o}^{G(t)}\phi_{u,o}^{Gmax}-\sum_{n\in BN_u}p_{u,n}^{D(t)}\phi_{u,n}^{Dmax}\right] \tag{3.2-5}\label{3.2-5}
+\end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{定式化されたMILP}
 \subsection{目的関数}
 \begin{align}
 &\sum_{t=1}^{48} \left[-\sum_{u\in \mathcal{L}} \sum_{o\in BO_u}\lambda_{u,o}^{G(t)}P_{u,o}^{G(t)}+\sum_{u\in \mathcal{L}} \sum_{n\in BN_u}\lambda_{u,n}^{D(t)}P_{u,n}^{D(t)}-\sum_{u,v\in \mathcal{L}}\rho_{uv}^{min}f_{uv}^{max}+\sum_{u,v\in \mathcal{L}}\rho_{uv}^{max}f_{uv}^{max}
@@ -104,6 +305,7 @@ P_{u,i(\omega)}^{DR(t)} &\le \overline{P_{ru,i(\omega)}^{DR(t)}}  & \forall u,t\
 -P_{u(\omega)}^{(t)Bal+}&\le0&\forall u,t\in\mathcal{L},\forall \omega \in \Omega \tag{ppv-1}\\
 -P_{u(\omega)}^{(t)Bal-}&\le 0&\forall u,t\in\mathcal{L},\forall \omega \in \Omega \tag{ppv-2}
 \end{align}
+
 
 \subsection{等式制約}
 \begin{align}
